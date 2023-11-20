@@ -7,6 +7,8 @@ name = "pypi"
 django = "*"
 install = "*"
 django-debug-toolbar = "*"
+djangorestframework = "*"
+markdown = "*"
 
 [dev-packages]
 
