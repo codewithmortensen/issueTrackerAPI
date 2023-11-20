@@ -10,10 +10,12 @@ def issue(request):
     return Response('ok')
 
 
+ALLOWED_HTTP_METHOD = ['get', 'post', 'patch', 'delete', 'head', 'options']
+
+
 class IssueViewSet(ModelViewSet):
-    http_method_names = ['get', 'post', 'patch', 'delete', 'head', 'options']
+    http_method_names = ALLOWED_HTTP_METHOD
     queryset = models.Issue.objects.all()
-    serializer_class = serializers.IssueSerializer
 
     def get_serializer_class(self):
         if self.request.method == 'PATCH':
@@ -21,3 +23,13 @@ class IssueViewSet(ModelViewSet):
         if self.request.method == 'POST':
             return serializers.CreateIssueSerializer
         return serializers.IssueSerializer
+
+
+class DeveloperViewSet(ModelViewSet):
+    http_method_names = ALLOWED_HTTP_METHOD
+    queryset = models.Developer.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'PATCH':
+            return serializers.UpdateDeveloperSerializer
+        return serializers.DeveloperSerializer
