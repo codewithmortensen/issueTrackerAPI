@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 
 def issue(request):
-    return HttpResponse('issues')
+    return render(request, 'issues/index.html')
