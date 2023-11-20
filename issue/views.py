@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import SAFE_METHODS
 from . import serializers, models
 
 
@@ -33,3 +34,11 @@ class DeveloperViewSet(ModelViewSet):
         if self.request.method == 'PATCH':
             return serializers.UpdateDeveloperSerializer
         return serializers.DeveloperSerializer
+
+
+class DeveloperAssignIssueViewSet(ModelViewSet):
+    # http_method_names = SAFE_METHODS
+
+    def get_queryset(self):
+        return models.Issue.objects.filter(assign_to_id=self.kwargs['developer_pk'])
+    serializer_class = serializers.IssueSerializer

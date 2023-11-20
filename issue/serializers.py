@@ -7,7 +7,7 @@ class SimpleUserSerializer(serializers.ModelSerializer):
     class Meta:
         # to be replace with the default auth user model
         model = User
-        fields = ['id', 'first_name', 'last_name', 'email']
+        fields = ['first_name', 'last_name', 'email']
 
 
 class SimpleDeveloperSerializer(serializers.ModelSerializer):
@@ -15,7 +15,7 @@ class SimpleDeveloperSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Developer
-        fields = ['id', 'user']
+        fields = ['user']
 
 
 class IssueSerializer(serializers.ModelSerializer):
@@ -65,6 +65,7 @@ class DeveloperSerializer(serializers.ModelSerializer):
 
 
 class UpdateDeveloperSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = models.Developer
         fields = ['status', 'birth_date', 'gender', 'phone']
