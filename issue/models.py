@@ -44,6 +44,8 @@ class Issue(models.Model):
 
     date_created = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
+    assign_to = models.ForeignKey(
+        Developer, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self) -> str:
         return f'{self.title}'
