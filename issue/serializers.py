@@ -44,7 +44,6 @@ class CreateIssueSerializer(serializers.ModelSerializer):
 
 class DeveloperSerializer(serializers.ModelSerializer):
     user = SimpleUserSerializer(read_only=True)
-    user_id = serializers.IntegerField()
 
     def validate_user_id(self, user_id):
         if models.Developer.objects.filter(pk=user_id).exists():
@@ -55,13 +54,15 @@ class DeveloperSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Developer
         fields = [
-            'id', 'user', 'user_id', 'status',
+            'id', 'user',  'status',
             'birth_date', 'gender', 'phone'
         ]
 
-    def create(self, validated_data):
 
-        return super().create(validated_data)
+class CreateDeveloperSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Developer
+        fields = ['user', 'status', 'birth_date', 'gender', 'phone']
 
 
 class UpdateDeveloperSerializer(serializers.ModelSerializer):
